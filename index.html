@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Dhanya ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg,#ff758c,#ff7eb3,#c471ed);
+            min-height:100vh;
+            color:white;
+            text-align:center;
+            overflow-x:hidden;
+        }
+
+        .container {
+            max-width:900px;
+            margin:auto;
+            padding:40px 20px;
+        }
+
+        h1 { font-size:48px; margin:20px 0; }
+        p { font-size:22px; margin:15px 0; }
+
+        /* SLIDESHOW */
+        .slideshow {
+            width:300px;
+            height:300px;
+            margin:30px auto;
+            position:relative;
+            border-radius:30px;
+            overflow:hidden;
+            box-shadow:0 10px 40px rgba(0,0,0,0.5);
+            border:4px solid rgba(255,255,255,0.4);
+        }
+
+        .slide {
+            position:absolute;
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            opacity:0;
+            transition:opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity:1;
+        }
+
+        .button-container {
+            margin:40px 0;
+        }
+
+        button {
+            padding:18px 45px;
+            font-size:24px;
+            border:none;
+            border-radius:50px;
+            cursor:pointer;
+            margin:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        #yes {
+            background:linear-gradient(135deg,#28a745,#20c997);
+            color:white;
+        }
+
+        #no {
+            background:linear-gradient(135deg,#dc3545,#e83e8c);
+            color:white;
+        }
+
+        #no.disabled {
+            background:#6c757d;
+            cursor:not-allowed;
+            opacity:0.6;
+        }
+
+        #finalMessage {
+            display:none;
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(10px);
+            padding:40px;
+            border-radius:30px;
+            margin-top:30px;
+        }
+
+        #celebrate {
+            display:none;
+            max-width:280px;
+            margin:20px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Hey Dhanya 💖</h1>
+    <p>Before I ask you something important… look at our little movie 🎬</p>
+
+    <!-- SLIDESHOW -->
+    <div class="slideshow">
+        <img class="slide active" src="photo1.jpg">
+        <img class="slide" src="photo2.jpg">
+        <img class="slide" src="reo1.jpg">
+        <img class="slide" src="reo2.jpg">
+    </div>
+
+    <h1 id="questionText">Dhanya… Will you be Rahul's Valentine? 💌</h1>
+
+    <div class="button-container">
+        <button id="yes" onclick="sayYes()">YES 💘</button>
+        <button id="no" onclick="sayNo()">NO 🙈</button>
+    </div>
+
+    <div id="finalMessage">
+        <h1>YAYYYY!!! 🎉💖</h1>
+        <p>
+            You just made Rahul the happiest person alive 😍<br><br>
+            From our cute moments… to Reo's naughty memories…<br>
+            to all the filmy love we live every day…<br><br>
+            This Valentine's is officially ours 💑✨
+        </p>
+    </div>
+
+    <img id="celebrate" src="celebrate.jpg">
+</div>
+
+<script>
+/* SLIDESHOW LOGIC */
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 2500);
+
+/* NO BUTTON LOGIC */
+let noCount = 0;
+const maxNo = 5;
+
+function sayNo(){
+    const noBtn = document.getElementById("no");
+    const q = document.getElementById("questionText");
+
+    noCount++;
+    noBtn.style.transform =
+        `translate(${Math.random()*40 - 20}px, ${Math.random()*40 - 20}px)`;
+
+    if(noCount >= maxNo){
+        noBtn.disabled = true;
+        noBtn.classList.add("disabled");
+        q.textContent = "Only YES is left now Dhanya 💕";
+    }
+}
+
+/* YES LOGIC */
+function sayYes(){
+    document.getElementById("yes").style.display="none";
+    document.getElementById("no").style.display="none";
+
+    document.getElementById("questionText").textContent =
+        "She said YES 💖 Rahul wins Valentine’s forever 🎬✨";
+
+    document.getElementById("finalMessage").style.display="block";
+    document.getElementById("celebrate").style.display="block";
+}
+</script>
+
+</body>
+</html>
